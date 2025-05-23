@@ -1,6 +1,9 @@
 package org.vaadin.example;
 
 import java.time.LocalDate;
+import java.util.concurrent.Executors;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -13,9 +16,10 @@ import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.Route;
 import com.vaadin.signals.NodeSignal;
 import com.vaadin.signals.Signal;
+import com.vaadin.signals.SignalEnvironment;
 import com.vaadin.signals.SignalFactory;
 import com.vaadin.signals.ValueSignal;
-import com.vaadin.signals.operations.SignalOperation;
+import com.vaadin.signals.operations.InsertOperation;
 
 @Route("node")
 @Menu(title = "NodeSignal", icon = "vaadin:plus")
@@ -29,10 +33,14 @@ public class NodeView extends VerticalLayout {
     private final DatePicker date = new DatePicker("Created by date");
 
     static {
-        category.putValue("id", 123);
-        category.putValue("name", "Category 1");
-        category.putValue("type", Type.TYPE1);
-        category.putValue("date", LocalDate.now());
+        SignalEnvironment.tryInitialize(new ObjectMapper(), Executors.newSingleThreadExecutor());
+        category.putChildWithValue("id", 123);
+        category.putChildWithValue("name", "Category 1");
+        category.putChildWithValue("type", Type.TYPE1);
+        category.putChildWithValue("date", LocalDate.now());
+        // just examples of how to use the API
+        ValueSignal<LocalDate> dateValue = category.asMap(LocalDate.class).value().get("date");
+        InsertOperation<NodeSignal> date1 = category.putChildIfAbsent("date");
     }
 
     public NodeView() {
