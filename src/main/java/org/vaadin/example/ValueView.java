@@ -31,9 +31,7 @@ public class ValueView extends VerticalLayout {
         product.value(new Product("Product #1", 100.0));
     }
 
-    private final UserDetailsManager userDetailsManager;
-
-    public ValueView(UserDetailsManager userDetailsManager) {
+    public ValueView() {
 //        ValueSignal<Product> productValueSignal = new ValueSignal<>(Product.class);
 //        Signal<Product> defaultProduct = productValueSignal.map(product1 -> {
 //            if (product1 == null) {
