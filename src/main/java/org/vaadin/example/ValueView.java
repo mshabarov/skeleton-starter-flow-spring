@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
+import org.springframework.security.provisioning.UserDetailsManager;
+
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Span;
@@ -29,7 +31,20 @@ public class ValueView extends VerticalLayout {
         product.value(new Product("Product #1", 100.0));
     }
 
-    public ValueView() {
+    private final UserDetailsManager userDetailsManager;
+
+    public ValueView(UserDetailsManager userDetailsManager) {
+//        ValueSignal<Product> productValueSignal = new ValueSignal<>(Product.class);
+//        Signal<Product> defaultProduct = productValueSignal.map(product1 -> {
+//            if (product1 == null) {
+//                return new Product("Default Product", 0.0);
+//            }
+//            return product1;
+//        });
+//        ValueSignal<Integer> age = SignalFactory.IN_MEMORY_SHARED.value("age", Integer.class);
+//        Signal<String> ageCategory = age.map(a ->
+//                a < 18 ? "Child" : (a < 65 ? "Adult" : "Senior"));
+//        ageCategory.peekConfirmed()
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);
         setAlignItems(Alignment.CENTER);

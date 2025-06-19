@@ -1,9 +1,6 @@
 package org.vaadin.example;
 
 import java.time.LocalDate;
-import java.util.concurrent.Executors;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -16,7 +13,6 @@ import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.Route;
 import com.vaadin.signals.NodeSignal;
 import com.vaadin.signals.Signal;
-import com.vaadin.signals.SignalEnvironment;
 import com.vaadin.signals.SignalFactory;
 import com.vaadin.signals.ValueSignal;
 import com.vaadin.signals.operations.InsertOperation;
@@ -33,7 +29,6 @@ public class NodeView extends VerticalLayout {
     private final DatePicker date = new DatePicker("Created by date");
 
     static {
-        SignalEnvironment.tryInitialize(new ObjectMapper(), Executors.newSingleThreadExecutor());
         category.putChildWithValue("id", 123);
         category.putChildWithValue("name", "Category 1");
         category.putChildWithValue("type", Type.TYPE1);
